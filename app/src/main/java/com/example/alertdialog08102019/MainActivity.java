@@ -1,5 +1,7 @@
 package com.example.alertdialog08102019;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnAlertDialog = findViewById(R.id.buttonAlertDialog);
+        //ctrl + .
 
 
 //        Banhmi banhmi = new Banhmi("Banh tron","Salad son","Ca chua bi","Sot bo","Pepsi");
@@ -35,22 +39,52 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Hop thoai xac nhan tat app ? ");
-                builder.setMessage("Ban hay xac nhan ben duoi!!!");
-                builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
+                builder.setTitle("Chọn ngôn ngữ sử dụng");
+//                builder.setMessage("Các ngữ thông dụng");
+//                builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        finish();
+//                    }
+//                });
+//                builder.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.cancel();
+//                    }
+//                });
+//                builder.setNeutralButton("Huy", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                });
+
+                final String[] arrayLang = {"C","C++","Java","Php","Javascript","Scala"};
+                boolean[] arrayChecked = {false,false,false,false,false,false};
+//                builder.setSingleChoiceItems(arrayLang, -1, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int position) {
+//                        Toast.makeText(MainActivity.this, arrayLang[position], Toast.LENGTH_SHORT).show();
+//                        dialog.dismiss();
+//                    }
+//                });
+                builder.setMultiChoiceItems(arrayLang, arrayChecked, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        if (isChecked){
+                            Toast.makeText(MainActivity.this, "Đã check", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Bỏ check", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
-                builder.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
+
+
+
                 builder.show();
             }
         });
     }
+
 }
